@@ -1,3 +1,4 @@
+#Program based on computer learning idea, it provides with wage and bias for linear trending
 import numpy
 from math import pow,sin,cos
 from moje import sigmoid as sid
