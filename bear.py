@@ -24,9 +24,9 @@ def wykres():
 	plt.plot(x02,y02,color="r")
 	plt.show()
 #pobranie nazwy pliku
-nazwa_pliku=input("Podaj nazwę pliku (bez rozszerzenia!): ")
+nazwa_pliku=input("Podaj nazwę pliku (z rozszerzeniem!): ")
 #czy jest potrzeba czyścić
-f = open(nazwa_pliku+".xls","r")
+f = open(nazwa_pliku,"r")
 linia=f.readline()
 try: liczba=int(linia[0])
 except: liczba="a"
@@ -44,7 +44,7 @@ if(type(liczba)!=int):
 		f.write("\n")
 	f.close()
 #pobranie danych do programu
-czas,wydluzenie,sila,naprezenie,liczba_cykli,c_liczba_cykli,powtorzone_cykle,wydluzenie,true_wydluzenie,wytrzymalosc,true_naprezenie = np.loadtxt(nazwa_pliku+".xls",unpack=True,delimiter="\t")
+czas,wydluzenie,sila,naprezenie,liczba_cykli,c_liczba_cykli,powtorzone_cykle,wydluzenie,true_wydluzenie,wytrzymalosc,true_naprezenie = np.loadtxt(nazwa_pliku,unpack=True,delimiter="\t")
 #Rm, R0,2
 Rm=max(naprezenie)
 x02,y02,R02,a=er02(20,70)
