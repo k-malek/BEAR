@@ -1,3 +1,4 @@
+#Be careful! What program actually does is it cuts all unnecessery things for it leaving only data. Make sure you make backup for your file before giving it to BEAR :)
 import numpy as np
 from matplotlib import pyplot as plt
 import trend
