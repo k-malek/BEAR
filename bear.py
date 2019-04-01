@@ -3,10 +3,13 @@ import numpy as np
 from matplotlib import pyplot as plt
 import trend
 import math
-def er02(x,y):
+def pobierz_punkty(x,y):
 	punkty=[]
 	for i in range(x,y):
 		punkty.append([wydluzenie[i],naprezenie[i]])
+	return punkty
+def er02(x,y):
+	punkty=pobierz_punkty(x,y)
 	a,b=trend.uczenie(300000,punkty)
 	x02=[]
 	y02=[]
@@ -19,6 +22,24 @@ def er02(x,y):
 			mini=math.fabs(((napr)-b)/a+0.2-wydluzenie[i])
 			R02=napr
 	return x02,y02,R02,a
+def A(nachylenie):
+	napr=0;
+	i=0;
+	while napr<Rm:
+		napr=naprezenie[i]
+		i+=1
+	punkty=pobierz_punkty(i+1,len(naprezenie)-1)
+	pop=Rm+0.2
+	napr=Rm
+	i=0
+	while (pop-napr)<1.5:
+		i+=1
+		pop=punkty[i-1][1]
+		napr=punkty[i][1]
+		print(punkty[i-1][1],punkty[i][1])
+	b=punkty[i][1]-(nachylenie*punkty[i][0])
+	wynik=-b/nachylenie
+	return wynik
 def wykres():
 	plt.plot(wydluzenie,naprezenie,color="g")
 	plt.plot(x02,y02,color="r")
@@ -56,10 +77,13 @@ while choice!="t":
 	x02,y02,R02,a=er02(x,y)
 	wykres()
 	choice=input("Czy teraz linia trendu wyszła poprawnie? (t/n) ")
+A=A(a)
 #Zamiana na jednostki
 E=str("{:.2f}".format(a))+" GPa"
-Rm=str(Rm)+" MPa"
-R02=str(R02)+" MPa"
+Rm=str("{:.2f}".format(Rm))+" MPa"
+R02=str("{:.2f}".format(R02))+" MPa"
+A=str("{:.2f}".format(A))+" %"
 print("E = "+E)
 print("Rm = "+Rm)
 print("R0,2 = "+R02)
+print("A = "+A)
